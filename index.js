@@ -4,8 +4,10 @@ const cron = require('node-cron')
 const token = '6172539606:AAEwNdxt5lH2PNospcFl0JfvqY0QyIdCB7w'
 
 const bot = new TelegrammApi(token, {polling: true})
+const chats = []
 bot.on('message', msg => {
     const chatId = msg.chat.id
+    if(chats.includes(chatId)) return chats.push(chatId)
     cron.schedule('5 0 4 * * *',  () => {
         bot.sendMessage(chatId, 'Здравствуйте товарищи самураи,хищники,гангстеры,муковозы и просто водители пора делать бабки')
     })
